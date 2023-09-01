@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Fontawesome CDN Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+    <script src="https://code.jquery.com/jquery-2.2.4.js" charset="utf-8"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+<div class="shopping-cart">
+  <!-- Title -->
+  <div class="title">
+    Shopping Cart
+  </div>
+ 
+  <!-- Product #1 -->
+  <div class="item">
+    <div class="buttons">
+      <span class="delete-btn"></span>
+      <span class="like-btn"></span>
+    </div>
+ 
+    <div class="image">
+      <img src="https://tn.jumia.is/unsafe/fit-in/120x80/filters:fill(white)/product/12/6225/1.jpg?8551" alt="" />
+    </div>
+
+    <div class="description">
+      <span>Giorgio Armani</span>
+      <span>Eau de Parfum 100ml</span>
+      <div>$
+        <span class="item-price">549</span>
+      </div>
+    </div>
+
+    <div class="quantity">
+      <button class="plus-btn" type="button" name="button">
+        <img src="img/plus.svg" alt="" />
+      </button>
+      <input type="text" name="name" value="1" disabled>
+      <button class="minus-btn" type="button" name="button">
+        <img src="img/minus.svg" alt="" />
+      </button>
+    </div>
+
+    <div class="total-price">$
+      <span class="total-item-price">549</span>
+    </div>
+  </div>
+
+  <!-- Product #2 -->
+  <div class="item">
+    <div class="buttons">
+      <span class="delete-btn"></span>
+      <span class="like-btn"></span>
+    </div>
+
+    <div class="image">
+      <img src="https://tn.jumia.is/unsafe/fit-in/120x80/filters:fill(white)/product/84/9467/1.jpg?5825" alt="" />
+    </div>
+
+    <div class="description">
+      <span>Nayef Parfum</span>
+      <span>Eau De Parfum 100ml</span>
+      <div>$
+        <span class="item-price">329</span>
+      </div>
+    </div>
+
+    <div class="quantity">
+      <button class="plus-btn" type="button" name="button">
+        <img src="img/plus.svg" alt="" />
+      </button>
+      <input type="text" name="name" value="1" disabled>
+      <button class="minus-btn" type="button" name="button">
+        <img src="img/minus.svg" alt="" />
+      </button>
+    </div>
+    <div class="total-price">$
+      <span class="total-item-price">329</span>
+    </div>
+  </div>
+
+  <!-- Product #3 -->
+  <div class="item">
+    <div class="buttons">
+      <span class="delete-btn"></span>
+      <span class="like-btn"></span>
+    </div>
+
+    <div class="image">
+      <img src="https://tn.jumia.is/unsafe/fit-in/120x80/filters:fill(white)/product/63/9235/1.jpg?6088" alt="" />
+    </div>
+
+    <div class="description">
+      <span>My way</span>
+      <span>Eau De Parfum 90ml</span>
+      <div>$
+        <span  class="item-price">430</span>
+      </div>
+    </div>
+
+    <div class="quantity">
+      <button class="plus-btn" type="button" name="button">
+        <img src="img/plus.svg" alt="" />
+      </button>
+      <input type="text" name="name" value="1" disabled>
+      <button class="minus-btn" type="button" name="button">
+        <img src="img/minus.svg" alt="" />
+      </button>
+    </div>
+    <div class="total-price">$
+      <span class="total-item-price">430</span>
+    </div>
+  </div>
+  <!-- Sub total -->
+  <div class="sub-tatal">
+    <div class="title">
+      Sub-Total
+    </div>
+    <div class="total-price">
+      <span>$</span>
+      <span class="sub-total">1308</span>
+    </div>
+  </div>
+  
+</div>
+<script type="text/javascript">
+$('.like-btn').on('click', function() {
+  $(this).toggleClass('is-active');
+});
+
+$('.minus-btn').on('click', function(e) {
+    e.preventDefault();
+    var $this = $(this);
+    var $input = $this.closest('div').find('input');
+    var value = parseInt($input.val());
+    if (value > 1) {
+        value = value - 1;
+    } 
+  $input.val(value);
+});
+
+$('.plus-btn').on('click', function(e) {
+    e.preventDefault();
+    var $this = $(this);
+    var $input = $this.closest('div').find('input');
+    var value = parseInt($input.val());
+    if (value < 100) {
+        value = value + 1;
+    } else {
+        value =100;
+    }
+    $input.val(value);
+});
+</script>
+</body>
+</html>
