@@ -31,7 +31,7 @@
     <div class="description">
       <span>Giorgio Armani</span>
       <span>Eau de Parfum 100ml</span>
-      <div>$
+      <div class="price">$
         <span class="item-price">549</span>
       </div>
     </div>
@@ -65,7 +65,7 @@
     <div class="description">
       <span>Nayef Parfum</span>
       <span>Eau De Parfum 100ml</span>
-      <div>$
+      <div class="price">$
         <span class="item-price">329</span>
       </div>
     </div>
@@ -98,7 +98,7 @@
     <div class="description">
       <span>My way</span>
       <span>Eau De Parfum 90ml</span>
-      <div>$
+      <div class="price">$
         <span  class="item-price">430</span>
       </div>
     </div>
@@ -123,7 +123,7 @@
     </div>
     <div class="total-price">
       <span>$</span>
-      <span class="sub-total">1308</span>
+      <span id="super_Total" class="sub-total">1308</span>
     </div>
   </div>
   
@@ -132,28 +132,45 @@
 $('.like-btn').on('click', function() {
   $(this).toggleClass('is-active');
 });
-
+$('.delete-btn').on('click', function() {
+  var subTotal = document.getElementById('super_Total');
+  var $this = $(this);
+  var items = $this.parents(':eq(1)');
+  var totalItemPrice =items[0].querySelectorAll(".total-item-price") ;
+  subTotal.innerHTML=parseInt(subTotal.innerText) - parseInt(totalItemPrice[0].innerText);
+  items[0].remove();
+});
 $('.minus-btn').on('click', function(e) {
     e.preventDefault();
+    var subTotal = document.getElementById('super_Total');
     var $this = $(this);
     var $input = $this.closest('div').find('input');
     var value = parseInt($input.val());
+    var items = $this.parents(':eq(1)');
+    var itemPrice =items[0].querySelectorAll(".item-price") ;
+    var totalItemPrice =items[0].querySelectorAll(".total-item-price") ;
     if (value > 1) {
         value = value - 1;
+        totalItemPrice[0].innerHTML=parseInt(totalItemPrice[0].innerText) - parseInt(itemPrice[0].innerText)
+        subTotal.innerHTML=parseInt(subTotal.innerText) - parseInt(itemPrice[0].innerText);
     } 
   $input.val(value);
 });
 
 $('.plus-btn').on('click', function(e) {
     e.preventDefault();
+    var subTotal = document.getElementById('super_Total');
     var $this = $(this);
     var $input = $this.closest('div').find('input');
     var value = parseInt($input.val());
+    var items = $this.parents(':eq(1)');
+    var itemPrice =items[0].querySelectorAll(".item-price") ;
+    var totalItemPrice =items[0].querySelectorAll(".total-item-price") ;
     if (value < 100) {
         value = value + 1;
-    } else {
-        value =100;
-    }
+        totalItemPrice[0].innerHTML=parseInt(totalItemPrice[0].innerText) + parseInt(itemPrice[0].innerText)
+        subTotal.innerHTML=parseInt(subTotal.innerText) + parseInt(itemPrice[0].innerText);
+    } 
     $input.val(value);
 });
 </script>
