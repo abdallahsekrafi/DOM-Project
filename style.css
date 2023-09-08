@@ -94,6 +94,12 @@ html, body {
   margin-right: 60px;
   width: 115px;
 }
+.description .price {
+  background-color: #212529;
+  color: white;
+  border-radius: 4px;
+  padding: 3px 6px;
+}
 .description span {
   display: block;
   font-size: 14px;
@@ -105,9 +111,9 @@ html, body {
 }
 .description span:last-child {
   display: inline;
-  font-weight: 300;
+  font-weight: bold;
   margin-top: 8px;
-  color: #939e86;
+  color: #ffffff;
 }
 /* quantity of each item - ad + butoons style */
 .quantity {
