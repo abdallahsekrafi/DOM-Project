@@ -10,7 +10,7 @@
     <script src="https://code.jquery.com/jquery-2.2.4.js" charset="utf-8"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
-  <body>
+  <body onload="onPageLoaded()">
 <div class="shopping-cart">
   <!-- Title -->
   <div class="title">
@@ -116,61 +116,89 @@
       <span class="total-item-price">430</span>
     </div>
   </div>
-  <!-- Sub total -->
+  <!-- Sub total 1308 -->
   <div class="sub-tatal">
     <div class="title">
       Sub-Total
     </div>
     <div class="total-price">
       <span>$</span>
-      <span id="super_Total" class="sub-total">1308</span>
+      <span id="super_Total" class="sub-total"></span>
     </div>
   </div>
   
 </div>
 <script type="text/javascript">
+  // fonction to calcule the subTotal in page loaded
+  function onPageLoaded() {
+    var subTotal = document.getElementById('super_Total');
+    //console.log(subTotal);
+    var TIPrice = document.querySelectorAll(".total-item-price") ;
+    //console.log(TIPrice);
+    let total=0;
+    for (let i = 0; i < TIPrice.length; i++) {
+      // get total item price one by one and do sum
+      total+= parseInt(TIPrice[i].innerText);
+    }
+    subTotal.innerHTML=total;
+}
+// when the like btn is clicked we toggle the class
 $('.like-btn').on('click', function() {
   $(this).toggleClass('is-active');
 });
 $('.delete-btn').on('click', function() {
+  // get all total item price element
   var subTotal = document.getElementById('super_Total');
   var $this = $(this);
+  // get the grandParent class
   var items = $this.parents(':eq(1)');
   var totalItemPrice =items[0].querySelectorAll(".total-item-price") ;
+  // update the sub_Total price
   subTotal.innerHTML=parseInt(subTotal.innerText) - parseInt(totalItemPrice[0].innerText);
+  // remove the item
   items[0].remove();
 });
 $('.minus-btn').on('click', function(e) {
     e.preventDefault();
+    // get all total item price element
     var subTotal = document.getElementById('super_Total');
     var $this = $(this);
+     // get the super class
     var $input = $this.closest('div').find('input');
     var value = parseInt($input.val());
+     // get the grandParent class
     var items = $this.parents(':eq(1)');
     var itemPrice =items[0].querySelectorAll(".item-price") ;
     var totalItemPrice =items[0].querySelectorAll(".total-item-price") ;
     if (value > 1) {
+       // reduce the quantity of item
         value = value - 1;
         totalItemPrice[0].innerHTML=parseInt(totalItemPrice[0].innerText) - parseInt(itemPrice[0].innerText)
         subTotal.innerHTML=parseInt(subTotal.innerText) - parseInt(itemPrice[0].innerText);
     } 
+    // update the value
   $input.val(value);
 });
 
 $('.plus-btn').on('click', function(e) {
     e.preventDefault();
+    // get all total item price element
     var subTotal = document.getElementById('super_Total');
     var $this = $(this);
+    // get the super class
     var $input = $this.closest('div').find('input');
     var value = parseInt($input.val());
+    // get the grandParent class
     var items = $this.parents(':eq(1)');
     var itemPrice =items[0].querySelectorAll(".item-price") ;
     var totalItemPrice =items[0].querySelectorAll(".total-item-price") ;
     if (value < 100) {
+       // increase the quantity of item
         value = value + 1;
         totalItemPrice[0].innerHTML=parseInt(totalItemPrice[0].innerText) + parseInt(itemPrice[0].innerText)
         subTotal.innerHTML=parseInt(subTotal.innerText) + parseInt(itemPrice[0].innerText);
     } 
+    // update the value
     $input.val(value);
 });
 </script>
