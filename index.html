@@ -32,7 +32,7 @@
       <span>Giorgio Armani</span>
       <span>Eau de Parfum 100ml</span>
       <div class="price">$
-        <span class="item-price">549</span>
+        <span class="item-price">549.49</span>
       </div>
     </div>
 
@@ -47,7 +47,7 @@
     </div>
 
     <div class="total-price">$
-      <span class="total-item-price">549</span>
+      <span class="total-item-price"></span>
     </div>
   </div>
 
@@ -80,7 +80,7 @@
       </button>
     </div>
     <div class="total-price">$
-      <span class="total-item-price">329</span>
+      <span class="total-item-price"></span>
     </div>
   </div>
 
@@ -99,7 +99,7 @@
       <span>My way</span>
       <span>Eau De Parfum 90ml</span>
       <div class="price">$
-        <span  class="item-price">430</span>
+        <span  class="item-price">430.5</span>
       </div>
     </div>
 
@@ -113,7 +113,7 @@
       </button>
     </div>
     <div class="total-price">$
-      <span class="total-item-price">430</span>
+      <span class="total-item-price"></span>
     </div>
   </div>
   <!-- Sub total 1308 -->
@@ -134,13 +134,21 @@
     var subTotal = document.getElementById('super_Total');
     //console.log(subTotal);
     var TIPrice = document.querySelectorAll(".total-item-price") ;
+    var ItemPrice = document.querySelectorAll(".item-price") ;
+    var ItemValue = document.querySelectorAll('input') ;
+    //console.log(ItemValue);
     //console.log(TIPrice);
     let total=0;
+    let totaOneItem=0;
     for (let i = 0; i < TIPrice.length; i++) {
+      // calcul of total item price one by one
+      totaOneItem = parseFloat(ItemPrice[i].innerText) * parseInt(ItemValue[i].value);
+      TIPrice[i].innerHTML = totaOneItem.toFixed(2);
       // get total item price one by one and do sum
-      total+= parseInt(TIPrice[i].innerText);
+      total+= totaOneItem;
     }
-    subTotal.innerHTML=total;
+    // update Sub Totatl price
+    subTotal.innerHTML=parseFloat(total.toFixed(2));
 }
 // when the like btn is clicked we toggle the class
 $('.like-btn').on('click', function() {
@@ -154,7 +162,7 @@ $('.delete-btn').on('click', function() {
   var items = $this.parents(':eq(1)');
   var totalItemPrice =items[0].querySelectorAll(".total-item-price") ;
   // update the sub_Total price
-  subTotal.innerHTML=parseInt(subTotal.innerText) - parseInt(totalItemPrice[0].innerText);
+  subTotal.innerHTML=(parseFloat(subTotal.innerText) - parseFloat(totalItemPrice[0].innerText)).toFixed(2);
   // remove the item
   items[0].remove();
 });
@@ -173,8 +181,8 @@ $('.minus-btn').on('click', function(e) {
     if (value > 1) {
        // reduce the quantity of item
         value = value - 1;
-        totalItemPrice[0].innerHTML=parseInt(totalItemPrice[0].innerText) - parseInt(itemPrice[0].innerText)
-        subTotal.innerHTML=parseInt(subTotal.innerText) - parseInt(itemPrice[0].innerText);
+        totalItemPrice[0].innerHTML=(parseFloat(totalItemPrice[0].innerText) - parseFloat(itemPrice[0].innerText)).toFixed(2);
+        subTotal.innerHTML=(parseFloat(subTotal.innerText) - parseFloat(itemPrice[0].innerText)).toFixed(2);;
     } 
     // update the value
   $input.val(value);
@@ -195,8 +203,8 @@ $('.plus-btn').on('click', function(e) {
     if (value < 100) {
        // increase the quantity of item
         value = value + 1;
-        totalItemPrice[0].innerHTML=parseInt(totalItemPrice[0].innerText) + parseInt(itemPrice[0].innerText)
-        subTotal.innerHTML=parseInt(subTotal.innerText) + parseInt(itemPrice[0].innerText);
+        totalItemPrice[0].innerHTML=(parseFloat(totalItemPrice[0].innerText) + parseFloat(itemPrice[0].innerText)).toFixed(2);
+        subTotal.innerHTML=(parseFloat(subTotal.innerText) + parseFloat(itemPrice[0].innerText)).toFixed(2);
     } 
     // update the value
     $input.val(value);
