@@ -60,7 +60,9 @@ html, body {
 .delete-btn {
   width: 18px;
   height: 17px;
-  background: url(img/delete.svg) no-repeat center;
+}
+.delete-btn i{
+  color: #de0d0d;
 }
 .like-btn {
   position: absolute;
